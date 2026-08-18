@@ -1,196 +1,154 @@
-const InfoIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
-  </svg>
-);
-const CheckIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="20 6 9 17 4 12" />
-  </svg>
-);
-const MapIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21" />
-    <line x1="9" y1="3" x2="9" y2="18" /><line x1="15" y1="6" x2="15" y2="21" />
-  </svg>
-);
-const RefreshIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="23 4 23 10 17 10" /><polyline points="1 20 1 14 7 14" />
-    <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" />
-  </svg>
-);
-const TableIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-    <line x1="3" y1="9" x2="21" y2="9" /><line x1="3" y1="15" x2="21" y2="15" />
-    <line x1="12" y1="3" x2="12" y2="21" />
-  </svg>
-);
-const CodeIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
-  </svg>
-);
+"use client";
 
 export default function LoginPage() {
   return (
-    <>
-      <div className="page-header">
-        <div className="page-tag">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-            <path d="M7 11V7a5 5 0 0110 0v4" />
-          </svg>
-          Networking
-        </div>
-        <h1>Login <span>Flow</span></h1>
-        <p className="page-desc">
-          Step-by-step breakdown of how a Growtopia client authenticates with buremtopia,
-          from initial ENet connect to world entry.
-        </p>
-      </div>
+    <article style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto", lineHeight: 1.7 }}>
+      <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #eee" }}>
+        <h1>Login Flow & Authentication</h1>
+        <p style={{ color: "#666", fontSize: "1.1rem" }}>Complete sequence from ENet connect to world entry</p>
+      </header>
 
-      <div className="content-body">
-        <div className="card">
-          <h2><MapIcon /> Overview</h2>
-          <p>
-            The Growtopia login sequence involves two systems: the <strong>HTTP Resolver</strong>
-            (provides the server address) and the <strong>ENet handshake</strong> (authenticates
-            the player).
-          </p>
-          <div className="alert alert-info">
-            <InfoIcon />
-            <span>
-              The client first fetches the server IP/port from the HTTP resolver, then opens an
-              ENet connection to that address. All packet exchange happens over ENet.
-            </span>
-          </div>
-        </div>
+      <section style={{ marginBottom: "2rem" }}>
+        <h2>Sequence Diagram</h2>
+        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto", fontSize: "0.85rem" }}><code>{`Client                          Server
+  |                                |
+  +- ENet Connect ---------------->|  CONNECT event
+  |                                |  allocate Player*
+  |<- Welcome (type 1) ------------|  send_(peer, 1, ...)
+  |                                |
+  +- Login Packet (type 2) ------->|  tankIDName|user
+  |   protocol|225                 |  tankIDPass|pass
+  |   game_version|5.53            |  requestedName|
+  |   fz|...                       |  f|1
+  |   klv|...                      |  protocol|225
+  |   hash|...                     |  game_version|5.53
+  |   mac|...                      |  fz|23314424
+  |   rid|...                      |  klv|037fbb...
+  |                                |  hash|466084983
+  |                                |  mac|9c:12:21:08:xx:xx:xx
+  |                                |  country|us
+  |                                |  RTENDMARKERBS1001
+  |                                |
+  |<- OnSuperMainStart (OSM) ------|  Type 4 binary
+  |   (world list, user data,      |  NetID, userID,
+  |    items, currency, etc.)      |  skin, clothes,
+  |                                |  currency, etc.
+  |                                |
+  +- Join Request (type 3) ------->|  action|join_request
+  |   action|join_request|WORLD    |  WORLD_NAME
+  |                                |
+  |<- World Data ------------------|  Type 4 packets
+  |   - World blocks               |  - World header
+  |   - Player spawn               |  - Tile data
+  |   - Other players              |  - Player spawns
+  |                                |
+  |<- OnConsoleMessage ------------|  "Welcome to WORLD"
+  |                                |
+  +- Gameplay begins ------------->|  Type 4 binary packets`}</code></pre>
+      </section>
 
-        <div className="card">
-          <h2><RefreshIcon /> Handshake Sequence</h2>
-          <div className="steps">
-            <div className="step">
-              <div className="step-num">1</div>
-              <div className="step-content">
-                <h4>HTTP Resolver Request</h4>
-                <p>
-                  Client POSTs to <code>/growtopia/server_data.php</code>. buremtopia responds
-                  with the ENet server IP, port, and type.
-                </p>
-              </div>
-            </div>
-            <div className="step">
-              <div className="step-num">2</div>
-              <div className="step-content">
-                <h4>ENet Connect</h4>
-                <p>
-                  Client opens UDP connection. buremtopia receives
-                  <code>ENET_EVENT_TYPE_CONNECT</code> and adds the peer to the peer map.
-                </p>
-              </div>
-            </div>
-            <div className="step">
-              <div className="step-num">3</div>
-              <div className="step-content">
-                <h4>Hello Packet (type 1)</h4>
-                <p>
-                  Client sends an empty Hello packet. buremtopia responds with a
-                  <code>TextParse</code> containing <code>action|hello</code> and server info.
-                </p>
-              </div>
-            </div>
-            <div className="step">
-              <div className="step-num">4</div>
-              <div className="step-content">
-                <h4>Login Request</h4>
-                <p>
-                  Client sends <code>action|login</code> TextParse with credentials:
-                  <code>tankIDName</code>, <code>tankIDPass</code>, <code>requestedName</code>,
-                  game version, and platform.
-                </p>
-              </div>
-            </div>
-            <div className="step">
-              <div className="step-num">5</div>
-              <div className="step-content">
-                <h4>Authentication</h4>
-                <p>
-                  buremtopia validates credentials. On success, a player session is created
-                  and a world selection packet is sent.
-                </p>
-              </div>
-            </div>
-            <div className="step">
-              <div className="step-num">6</div>
-              <div className="step-content">
-                <h4>World Entry</h4>
-                <p>
-                  Server sends a <code>GameUpdatePacket</code> with world data.
-                  Player is now in-game.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+      <section style={{ marginBottom: "2rem" }}>
+        <h2>Login Packet Fields</h2>
+        <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <thead>
+            <tr style={{ background: "#f5f5f5" }}>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Field</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Example</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>tankIDName</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>MyUsername</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Account username</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>tankIDPass</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>MyPassword</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Account password (plaintext)</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>requestedName</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>""</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Name change request (usually empty)</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>f</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>1</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Platform flag</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>protocol</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>225</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Protocol version (must match server)</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>game_version</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>5.53</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Client game version</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>fz</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>23314424</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Fingerprint/hash</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>klv</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>037fbb624f...</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Key lineage value (64-char hex)</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>hash</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>466084983</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Account hash</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>mac</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>9c:12:21:08:xx:xx:xx</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>MAC address</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>rid</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>026F4146...</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Device RID (32-char hex)</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>country</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>us</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Country code</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>platformID</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0,1,1</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Platform identifiers</td></tr>
+          </tbody>
+        </table>
+      </section>
 
-        <div className="card">
-          <h2><TableIcon /> Login Packet Fields</h2>
-          <table className="packet-table">
-            <thead>
-              <tr><th>Key</th><th>Type</th><th>Description</th></tr>
-            </thead>
-            <tbody>
-              <tr><td><code>tankIDName</code></td><td>string</td><td>Player username (empty for guest)</td></tr>
-              <tr><td><code>tankIDPass</code></td><td>string</td><td>Password hash (GrowID) or empty</td></tr>
-              <tr><td><code>requestedName</code></td><td>string</td><td>Guest name requested</td></tr>
-              <tr><td><code>f</code></td><td>string</td><td>Platform identifier (<code>0</code> = PC)</td></tr>
-              <tr><td><code>protocol</code></td><td>integer</td><td>ENet protocol version (should be <code>209</code>)</td></tr>
-              <tr><td><code>game_version</code></td><td>string</td><td>Client version string</td></tr>
-              <tr><td><code>country</code></td><td>string</td><td>2-letter country code from client</td></tr>
-            </tbody>
-          </table>
-          <div className="alert alert-success" style={{ marginTop: '14px' }}>
-            <CheckIcon />
-            <span>
-              buremtopia supports both <strong>GrowID</strong> (hashed password) and
-              <strong>Guest</strong> login modes. Guest mode is the simplest way to test
-              connectivity without setting up an account database.
-            </span>
-          </div>
-        </div>
+      <section style={{ marginBottom: "2rem" }}>
+        <h2>OnSuperMainStart (OSM) Response</h2>
+        <p>The OSM is the critical response packet sent after successful authentication. It contains all data needed for the client to begin gameplay:</p>
+        <ul>
+          <li><strong>Player identity:</strong> NetID, userID, skin, clothes, colors</li>
+          <li><strong>Currency:</strong> Gems, World Locks, Diamond Locks, Blue Gem Locks</li>
+          <li><strong>Inventory:</strong> Full item list with counts</li>
+          <li><strong>World list:</strong> Available worlds, last world</li>
+          <li><strong>Social:</strong> Friends list, ignored players</li>
+          <li><strong>Flags:</strong> VIP, moderator, supporter, roles</li>
+          <li><strong>Playmods:</strong> Active effects with timers</li>
+          <li><strong>Settings:</strong> Audio, graphics, privacy</li>
+        </ul>
+        <p>The OSM is a type 4 binary packet built via <code>gamepacket_t</code> with structured serialization.</p>
+      </section>
 
-        <div className="card">
-          <h2><CodeIcon /> Handling in Code</h2>
-          <pre>
-            <span className="pre-label">C++</span>
-            <code>{`void PacketHandler::on_login(ENetPeer* peer, TextParse& tp) {
-    auto name = tp.get("tankIDName");
-    auto pass = tp.get("tankIDPass");
+      <section style={{ marginBottom: "2rem" }}>
+        <h2>Server-Side Processing</h2>
+        <h3>Rate Limiting</h3>
+        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{// Reset counters every 6.5 seconds
+if (Server_Security.login_time + 6500 < now_ms()) {
+    Server_Security.login_count = 0;
+    Server_Security.update_item_data = 0;
+    Server_Security.login_time = now_ms();
+}
 
-    if (name.empty()) {
-        name = tp.get("requestedName");
-        if (!is_valid_name(name)) {
-            send_log(peer, "Invalid name.");
-            return;
-        }
-    } else {
-        if (!auth_.verify(name, pass)) {
-            send_log(peer, "Wrong password.");
-            enet_peer_disconnect_later(peer, 0);
-            return;
-        }
-    }
+// Limit concurrent logins per IP
+int logged = count_peers_with_same_ip(peer->ip);
+if (logged >= 3 || Server_Security.login_count > 40) {
+    failed_login(peer, "Too many people logging in");
+    return;
+}
 
-    sessions_[peer->connectID] = PlayerSession{ name };
-    send_world_select(peer);
-}`}</code>
-          </pre>
-        </div>
+Server_Security.login_count++;`}</code></pre>
 
-        <footer className="footer">// buremtopia Documentation · Login Flow</footer>
-      </div>
-    </>
+        <h3>Authentication</h3>
+        <ol>
+          <li>Parse login packet fields</li>
+          <li>Check RID bans (<code>Server_Security.ridbans</code>)</li>
+          <li>Load player JSON from <code>players/{name}_.json</code></li>
+          <li>Verify password hash</li>
+          <li>Load inventory, clothes, currency, flags</li>
+          <li>Apply playmods, check expirations</li>
+          <li>Build and send OSM response</li>
+          <li>Set <code>pInfo(peer)->bypass = true</code> for type 3 packets</li>
+        </ol>
+      </section>
+
+      <section style={{ marginBottom: "2rem" }}>
+        <h2>Join Request & World Entry</h2>
+        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{// Client sends (type 3):
+action|join_request|WORLD_NAME
+
+// Server processes:
+1. Load world (get_world) - creates or loads from JSON
+2. Send world header (size, weather, locks, etc.)
+3. Send tile data (PackBlockType for each tile)
+4. Send player spawn (OnSpawn with NetID, position, clothes)
+5. Send other players in world (OnSpawn for each)
+6. Send OnConsoleMessage "Welcome to WORLD_NAME"`}</code></pre>
+      </section>
+
+      <section>
+        <h2>Load Testing Tool</h2>
+        <p>A bundled test tool simulates 60 concurrent clients:</p>
+        <ul>
+          <li>Generates unique names: <code>faker{id}_{timestamp}</code></li>
+          <li>Sends login packet with all required fields</li>
+          <li>Waits for <code>OnSuperMainStart</code> detection</li>
+          <li>Sends <code>action|join_request|START</code></li>
+          <li>Logs connection metrics (connected, login sent, OSM received, join sent)</li>
+        </ul>
+        <p>Useful for load testing and protocol debugging.</p>
+      </section>
+    </article>
   );
 }

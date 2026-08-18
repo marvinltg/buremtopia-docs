@@ -1,0 +1,122 @@
+﻿
+> buremtopia-docs@1.0.0 build
+> next build
+
+  Γû▓ Next.js 14.2.5
+
+   Creating an optimized production build ...
+node.exe : Failed to compile.
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Failed to compile.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+./src/app/docs/enet/page.tsx
+Error: 
+  [31mx[0m Unexpected token `article`. Expected jsx identifier
+   ,-[[36;1;4mC:\Users\HYPE AMD\Downloads\base-gt3\gtps3-docs\src\app\docs\enet\page.tsx[0m:2:1]
+ [2m2[0m | 
+ [2m3[0m | export default function EnetPage() {
+ [2m4[0m |   return (
+ [2m5[0m |     <article style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto", lineHeight: 1.7 }}>
+   : [31;1m     ^^^^^^^[0m
+ [2m6[0m |       <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #eee" }}>
+ [2m7[0m |         <h1>ENet &amp; Network Protocol</h1>
+ [2m8[0m |         <p style={{ color: "#666", fontSize: "1.1rem" }}>UDP networking with reliability, compression, 
+and custom packet protocol</p>
+   `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/app/docs/enet/page.tsx
+
+./src/app/docs/events/page.tsx
+Error: 
+  [31mx[0m Unexpected token `article`. Expected jsx identifier
+   ,-[[36;1;4mC:\Users\HYPE AMD\Downloads\base-gt3\gtps3-docs\src\app\docs\events\page.tsx[0m:2:1]
+ [2m2[0m | 
+ [2m3[0m | export default function EventsPage() {
+ [2m4[0m |   return (
+ [2m5[0m |     <article style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto", lineHeight: 1.7 }}>
+   : [31;1m     ^^^^^^^[0m
+ [2m6[0m |       <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #eee" }}>
+ [2m7[0m |         <h1>Game Events</h1>
+ [2m8[0m |         <p style={{ color: "#666", fontSize: "1.1rem" }}>Hide &amp; Seek, Beach Party, Crypto, Daily 
+Quests, and timers</p>
+   `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/app/docs/events/page.tsx
+
+./src/app/docs/guilds/page.tsx
+Error: 
+  [31mx[0m Unexpected token `article`. Expected jsx identifier
+   ,-[[36;1;4mC:\Users\HYPE AMD\Downloads\base-gt3\gtps3-docs\src\app\docs\guilds\page.tsx[0m:2:1]
+ [2m2[0m | 
+ [2m3[0m | export default function GuildsPage() {
+ [2m4[0m |   return (
+ [2m5[0m |     <article style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto", lineHeight: 1.7 }}>
+   : [31;1m     ^^^^^^^[0m
+ [2m6[0m |       <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #eee" }}>
+ [2m7[0m |         <h1>Guild System</h1>
+ [2m8[0m |         <p style={{ color: "#666", fontSize: "1.1rem" }}>Guild creation, members, roles, ranks, and 
+leaderboards</p>
+   `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/app/docs/guilds/page.tsx
+
+./src/app/docs/http/page.tsx
+Error: 
+  [31mx[0m Unexpected token `article`. Expected jsx identifier
+   ,-[[36;1;4mC:\Users\HYPE AMD\Downloads\base-gt3\gtps3-docs\src\app\docs\http\page.tsx[0m:2:1]
+ [2m2[0m | 
+ [2m3[0m | export default function HttpPage() {
+ [2m4[0m |   return (
+ [2m5[0m |     <article style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto", lineHeight: 1.7 }}>
+   : [31;1m     ^^^^^^^[0m
+ [2m6[0m |       <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #eee" }}>
+ [2m7[0m |         <h1>HTTP Resolver (Server Data)</h1>
+ [2m8[0m |         <p style={{ color: "#666", fontSize: "1.1rem" }}>TCP server on port 80 returning server 
+connection data to clients</p>
+   `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/app/docs/http/page.tsx
+
+./src/app/docs/items/page.tsx
+Error: 
+  [31mx[0m Unexpected token `article`. Expected jsx identifier
+   ,-[[36;1;4mC:\Users\HYPE AMD\Downloads\base-gt3\gtps3-docs\src\app\docs\items\page.tsx[0m:2:1]
+ [2m2[0m | 
+ [2m3[0m | export default function ItemsPage() {
+ [2m4[0m |   return (
+ [2m5[0m |     <article style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto", lineHeight: 1.7 }}>
+   : [31;1m     ^^^^^^^[0m
+ [2m6[0m |       <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #eee" }}>
+ [2m7[0m |         <h1>Items &amp; Blocks</h1>
+ [2m8[0m |         <p style={{ color: "#666", fontSize: "1.1rem" }}>ItemDB, block types, clothing, and item 
+properties</p>
+   `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/app/docs/items/page.tsx
+
+
+> Build failed because of webpack errors

@@ -1,170 +1,203 @@
-const WarnIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
-    <line x1="12" y1="9" x2="12" y2="13" /><line x1="12" y1="17" x2="12.01" y2="17" />
-  </svg>
-);
-const ListIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="8" y1="6" x2="21" y2="6" /><line x1="8" y1="12" x2="21" y2="12" /><line x1="8" y1="18" x2="21" y2="18" />
-    <line x1="3" y1="6" x2="3.01" y2="6" /><line x1="3" y1="12" x2="3.01" y2="12" /><line x1="3" y1="18" x2="3.01" y2="18" />
-  </svg>
-);
-const DatabaseIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <ellipse cx="12" cy="5" rx="9" ry="3" /><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
-    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
-  </svg>
-);
-const GamepadIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="6" y1="12" x2="10" y2="12" /><line x1="8" y1="10" x2="8" y2="14" />
-    <line x1="15" y1="13" x2="15.01" y2="13" /><line x1="18" y1="11" x2="18.01" y2="11" />
-    <rect x="2" y="8" width="20" height="12" rx="2" />
-  </svg>
-);
-const TypeIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="4 7 4 4 20 4 20 7" /><line x1="9" y1="20" x2="15" y2="20" />
-    <line x1="12" y1="4" x2="12" y2="20" />
-  </svg>
-);
+"use client";
 
 export default function PacketsPage() {
   return (
-    <>
-      <div className="page-header">
-        <div className="page-tag">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="16.5" y1="9.4" x2="7.5" y2="4.21" />
-            <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
-            <polyline points="3.27 6.96 12 12.01 20.73 6.96" /><line x1="12" y1="22.08" x2="12" y2="12" />
-          </svg>
-          Core Concepts
-        </div>
-        <h1>Packet <span>System</span></h1>
-        <p className="page-desc">
-          How buremtopia encodes and decodes Growtopia's binary packet format — including
-          GameUpdatePacket, TextParse strings, and the ByteStream helper.
-        </p>
-      </div>
+    <article style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto", lineHeight: 1.7 }}>
+      <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #eee" }}>
+        <h1>Packet System</h1>
+        <p style={{ color: "#666", fontSize: "1.1rem" }}>gamepacket_t serialization, text vs binary packets, and message IDs</p>
+      </header>
 
-      <div className="content-body">
-        <div className="card">
-          <h2><ListIcon /> Packet Types</h2>
-          <p>
-            Every packet starts with a 4-byte <strong>type field</strong> that determines
-            how the rest of the payload is parsed:
-          </p>
-          <table className="packet-table">
-            <thead>
-              <tr><th>Type ID</th><th>Name</th><th>Description</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>1</code></td>
-                <td><span className="tag tag-yellow">Hello</span></td>
-                <td>First packet sent by client on connect — no payload</td>
-              </tr>
-              <tr>
-                <td><code>2</code></td>
-                <td><span className="tag tag-blue">TextParse</span></td>
-                <td>Key-value string packet (login info, game messages)</td>
-              </tr>
-              <tr>
-                <td><code>3</code></td>
-                <td><span className="tag tag-green">GameUpdate</span></td>
-                <td>Binary GameUpdatePacket — world state, movement, actions</td>
-              </tr>
-              <tr>
-                <td><code>4</code></td>
-                <td><span className="tag tag-purple">RawText</span></td>
-                <td>Plain chat or command string from client</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      <section style={{ marginBottom: "2rem" }}>
+        <h2>gamepacket_t Structure</h2>
+        <p>The core packet builder used for all type 4 (binary) packets. Uses a large fixed buffer followed by typed data inserts.</p>
+        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`class gamepacket_t {
+public:
+    unsigned char buffer[1024 * 256];  // 256KB packet buffer
+    unsigned int index = 0;            // write cursor
+    int type = 0;                      // message type
+    bool encrypted = false;
 
-        <div className="card">
-          <h2><DatabaseIcon /> ByteStream</h2>
-          <p>
-            <code>ByteStream</code> is a cursor-based reader/writer wrapping
-            <code>std::vector&lt;uint8_t&gt;</code>. It handles endianness and bounds checking
-            so packet parsers don't need manual pointer arithmetic.
-          </p>
-          <pre>
-            <span className="pre-label">C++</span>
-            <code>{`ByteStream stream{ raw_data, raw_len };
+    // Insert methods - typed serialization
+    void Insert(unsigned char value);  // 0x00 type marker
+    void Insert(int value);            // 0x01 int32
+    void Insert(unsigned int value);   // 0x01 uint32
+    void Insert(float value);          // 0x01 float (bit-cast)
+    void Insert(string value);         // 0x02 length + bytes
+    void Insert(const char* value);    // 0x02 C-string
+    void Insert(vector<int> value);    // 0x03 array of ints
+    void InsertRaw(...);               // raw bytes without type marker
+};`}</code></pre>
+      </section>
 
-uint32_t type  = stream.read<uint32_t>();   // reads 4 bytes LE
-uint8_t  flags = stream.read<uint8_t>();
+      <section style={{ marginBottom: "2rem" }}>
+        <h2>Type Markers (Serialization)</h2>
+        <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <thead>
+            <tr style={{ background: "#f5f5f5" }}>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Marker Byte</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Type</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Wire Format</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0x00</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>byte</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0x00 + 1 byte</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0x01</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>int32/uint32/float</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0x01 + 4 bytes LE</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0x02</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>string</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0x02 + int32 len + bytes</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0x03</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>array (int)</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0x03 + int32 count + 4-byte items</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0x05</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>struct/raw</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0x05 + length-prefixed</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0x09</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>special</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0x09 + custom format</td></tr>
+          </tbody>
+        </table>
+      </section>
 
-// Writing
-ByteStream out;
-out.write<uint32_t>(3);          // packet type: GameUpdate
-out.write<uint8_t>(flags);
-out.write_string(player_name);  // 2-byte len prefix + UTF-8`}</code>
-          </pre>
-          <div className="alert alert-warn">
-            <WarnIcon />
-            <span>
-              <code>ByteStream</code> takes a <em>view</em> of the ENet packet buffer.
-              Do not free the ENetPacket before finishing all reads on the stream.
-            </span>
-          </div>
-        </div>
+      <section style={{ marginBottom: "2rem" }}>
+        <h2>Message Types</h2>
+        <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <thead>
+            <tr style={{ background: "#f5f5f5" }}>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Type</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Name</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Format</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>1</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Welcome</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Text</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Connection handshake ACK</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>2</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Text</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Text (|)</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Login, chat, dialogs, commands</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>3</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Extended Text</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Text (|)</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Requires bypass flag; join requests, purchases</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>4</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Binary</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Serialized</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Movement, actions, world, spawn, OSM</td></tr>
+          </tbody>
+        </table>
+      </section>
 
-        <div className="card">
-          <h2><GamepadIcon /> GameUpdatePacket</h2>
-          <p>
-            The GameUpdatePacket (type <code>3</code>) has a fixed 56-byte header followed
-            by an optional variable-length extra data blob.
-          </p>
-          <h3>Header Fields</h3>
-          <table className="packet-table">
-            <thead>
-              <tr><th>Offset</th><th>Size</th><th>Field</th><th>Description</th></tr>
-            </thead>
-            <tbody>
-              <tr><td><code>0</code></td><td>4B</td><td>type</td><td>Always <code>3</code></td></tr>
-              <tr><td><code>4</code></td><td>1B</td><td>packet_type</td><td>Enum: move, punch, place…</td></tr>
-              <tr><td><code>5</code></td><td>1B</td><td>flags</td><td>Bitmask of packet options</td></tr>
-              <tr><td><code>8</code></td><td>4B</td><td>value</td><td>General-purpose value field</td></tr>
-              <tr><td><code>12</code></td><td>4B</td><td>net_id</td><td>Player net ID (sender)</td></tr>
-              <tr><td><code>16</code></td><td>4B</td><td>target_net_id</td><td>Target entity net ID</td></tr>
-              <tr><td><code>20</code></td><td>4B</td><td>item_id</td><td>Item being used/placed</td></tr>
-              <tr><td><code>24</code></td><td>4B</td><td>x</td><td>World tile X position</td></tr>
-              <tr><td><code>28</code></td><td>4B</td><td>y</td><td>World tile Y position</td></tr>
-              <tr><td><code>48</code></td><td>4B</td><td>extra_data_size</td><td>Bytes of extra data following header</td></tr>
-            </tbody>
-          </table>
-        </div>
+      <section style={{ marginBottom: "2rem" }}>
+        <h2>Binary Packet Assembly</h2>
+        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Example: OnSpawn packet (type 4)
+gamepacket_t pack;
+pack.Insert(4);                      // message type (binary)
+pack.Insert(2);                      // action type (OnSpawn)
+pack.Insert(player->netID);          // netID
+pack.Insert(player->userID);         // userID
+pack.Insert(player->characterState); // char state
+pack.Insert(player->posX);           // int X
+pack.Insert(player->posY);           // int Y
+pack.Insert(player->posX);           // float X (for client)
+pack.Insert(player->posY);           // float Y
+pack.Insert(player->flags);          // flags
+pack.Insert(player->guildID);        // guild
+pack.Insert(player->guildRank);      // guild rank
+pack.Insert(player->userName);       // string name
+pack.Insert(player->userNick);       // string nick
+pack.Insert(player->clothes);        // itemIDs array (7)
+pack.Insert(player->hairColor);      // int
+pack.Insert(player->eyeColor);       // int
+pack.Insert(player->skinColor);      // int
+pack.Insert(0);                      // rain strength
+pack.Insert(player->hats);           // extra hats
+pack.Insert(0);                      // state
+pack.Insert(0);                      // pose
+pack.Insert(player->renderType);     // render type
 
-        <div className="card">
-          <h2><TypeIcon /> TextParse Format</h2>
-          <p>
-            <strong>TextParse</strong> is Growtopia's key-value encoding for game messages and
-            login packets — newline-delimited, pipe-separated.
-          </p>
-          <pre>
-            <span className="pre-label">TextParse</span>
-            <code>{`action|log
-message|Hello, World!
+send_raw(peer, pack.buffer, pack.index);`}</code></pre>
+      </section>
 
-action|set_url
-url|growtopia1.ubisoft.com`}</code>
-          </pre>
-          <pre>
-            <span className="pre-label">C++</span>
-            <code>{`TextParse tp{};
-tp.set("action", "log");
-tp.set("message", "Welcome!");
-peer_send_text(peer, tp.serialize());`}</code>
-          </pre>
-        </div>
+      <section style={{ marginBottom: "2rem" }}>
+        <h2>Text Packet Format</h2>
+        <p>Text packets use pipe-delimited key-value pairs. Client to Server for type 2/3:</p>
+        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`tankIDName|user|tankIDPass|pass|requestedName||f|1|protocol|225|game_version|5.53|fz|23314424|klv|...|hash|...|mac|...|rid|...|country|us|platformID|0,1,1
 
-        <footer className="footer">// buremtopia Documentation · Packet System</footer>
-      </div>
-    </>
+// Chat message
+playerChat|text|Hello world
+
+// Command
+action|input|/warp spawn
+
+// Join request (type 3 - bypass)
+action|join_request|WORLD_NAME`}</code></pre>
+      </section>
+
+      <section style={{ marginBottom: "2rem" }}>
+        <h2>Action IDs</h2>
+        <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <thead>
+            <tr style={{ background: "#f5f5f5" }}>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Action ID</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Name</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Direction</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnPlayerLeft</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -> Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>1</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnPlayerMoving</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Both</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>2</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSpawn</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -> Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>3</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnRemove</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -> Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>4</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendMapData</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -> Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>7</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendTileUpdateData</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Both</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>9</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendTileUpdateDataMultiple</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -> Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>11</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendTileDamage</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Both</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>12</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendPingRequest</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -> Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>13</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendPingResponse</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Client -> Srv</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>19</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendInventoryState</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -> Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>20</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendItemDatabaseData</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -> Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>21</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendTileData</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -> Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>22</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnReconnect</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -> Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>26</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendGameModes</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -> Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>27</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendPlayerMessage</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -> Client</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section style={{ marginBottom: "2rem" }}>
+        <h2>PlayerMoving Struct</h2>
+        <p>Used for type 4 binary movement packets (action 1):</p>
+        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`struct PlayerMoving {
+    int netID;
+    int characterState;
+    int punchX, punchY;      // punch target
+    int posX, posY;          // int position (tile-aligned)
+    float posXf, posYf;      // float position (pixel)
+    int plantedTree;         // tree id if planting
+    int plantSeed;           // seed id if planting
+    int plantFrame;          // tree frame
+    int plantPosX, plantPosY;
+    int isPunching;          // 1 = punching
+    int isFlag;              // extra flags
+    int isJiggle;            // jiggle/anim flag
+};`}</code></pre>
+      </section>
+
+      <section style={{ marginBottom: "2rem" }}>
+        <h2>Packing/Unpacking Flow</h2>
+        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// CLIENT TO SERVER (incoming type 4)
+// 1. Validate packet header (61-byte, 4-byte length)
+// 2. Decode packed chunks with bit-reading
+// 3. Unpack into PlayerMoving fields
+// 4. Route to action handler
+
+// SERVER TO CLIENT (outgoing)
+// 1. Build gamepacket_t with Insert()
+// 2. Pack PlayerMoving fields with bit-writer
+// 3. Append to packet buffer
+// 4. Send via enet_packet_create`}</code></pre>
+        <p>Bit-packing reduces bandwidth for movement data - integer positions are packed with 4-bit field IDs and signed values use zigzag encoding.</p>
+      </section>
+
+      <section style={{ marginBottom: "2rem" }}>
+        <h2>Packet Counters (Anti-Flood)</h2>
+        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{// Per-peer monitoring (anti-flood)
+pInfo(peer)->all_packets++;      // total received
+pInfo(peer)->pps++;              // per-second counter
+pInfo(peer)->last_packet = now_ms();
+
+// Send rate tracking
+pInfo(peer)->sent_packets++;
+pInfo(peer)->sent_bytes += packet->dataLength;
+
+// Limits (disconnect triggers)
+all_packets >= 560  -> flood
+pps >= 16           -> too many pps`}</code></pre>
+      </section>
+    </article>
   );
 }

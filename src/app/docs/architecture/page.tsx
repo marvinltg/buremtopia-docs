@@ -1,154 +1,151 @@
-const InfoIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
-  </svg>
-);
-const WarnIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
-    <line x1="12" y1="9" x2="12" y2="13" /><line x1="12" y1="17" x2="12.01" y2="17" />
-  </svg>
-);
-const LayoutIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><line x1="3" y1="9" x2="21" y2="9" /><line x1="9" y1="21" x2="9" y2="9" />
-  </svg>
-);
-const FolderIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
-  </svg>
-);
-const RefreshIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="23 4 23 10 17 10" /><polyline points="1 20 1 14 7 14" />
-    <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" />
-  </svg>
-);
-const ThreadIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="4" y1="9" x2="20" y2="9" /><line x1="4" y1="15" x2="20" y2="15" />
-    <line x1="10" y1="3" x2="8" y2="21" /><line x1="16" y1="3" x2="14" y2="21" />
-  </svg>
-);
+"use client";
 
 export default function ArchitecturePage() {
   return (
-    <>
-      <div className="page-header">
-        <div className="page-tag">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="4" y="4" width="16" height="16" rx="2" /><rect x="9" y="9" width="6" height="6" />
-            <line x1="9" y1="1" x2="9" y2="4" /><line x1="15" y1="1" x2="15" y2="4" />
-            <line x1="9" y1="20" x2="9" y2="23" /><line x1="15" y1="20" x2="15" y2="23" />
-            <line x1="20" y1="9" x2="23" y2="9" /><line x1="20" y1="14" x2="23" y2="14" />
-            <line x1="1" y1="9" x2="4" y2="9" /><line x1="1" y1="14" x2="4" y2="14" />
-          </svg>
-          Core Concepts
-        </div>
-        <h1>Server <span>Architecture</span></h1>
-        <p className="page-desc">
-          High-level overview of buremtopia — module structure, event loop design,
-          and the threading model.
-        </p>
-      </div>
+    <article style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto", lineHeight: 1.7 }}>
+      <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #eee" }}>
+        <h1>System Architecture</h1>
+        <p style={{ color: "#666", fontSize: "1.1rem" }}>High-level overview of GTPS3 server components and data flow</p>
+      </header>
 
-      <div className="content-body">
-        <div className="card">
-          <h2><LayoutIcon /> Design Philosophy</h2>
-          <p>
-            buremtopia is built around a <strong>single-threaded event loop</strong> per network host,
-            with clean separation between the networking layer (ENet), the game logic layer,
-            and the scripting layer (Lua). The goal is minimal coupling and maximum testability.
-          </p>
-          <ul className="doc-list">
-            <li><strong>ENet Host</strong> — Manages all peer connections and raw packet I/O</li>
-            <li><strong>Packet Dispatcher</strong> — Decodes binary packets and routes to handlers</li>
-            <li><strong>Lua Runtime</strong> — Executes scripts registered for packet types or events</li>
-          </ul>
-        </div>
+      <section style={{ marginBottom: "2rem" }}>
+        <h2>Component Diagram</h2>
+        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto", fontSize: "0.85rem" }}><code>{`┌─────────────────────────────────────────────────────────────────┐
+│                        GTPS3 SERVER                              │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌──────────────┐  ┌──────────────┐  ┌────────────────────────┐ │
+│  │  ENet Host   │◄─│  HTTP        │  │  Main Thread           │ │
+│  │  (UDP 53181) │  │  Resolver    │  │  ┌──────────────────┐  │ │
+│  │  ┌────────┐  │  │  (TCP 80)    │  │  │ Game Loop        │  │ │
+│  │  │ Peer   │  │  └──────────────┘  │  │  ├─ World Updates │  │ │
+│  │  │ Manager│  │                   │  │  ├─ Player Logic  │  │ │
+│  │  └────────┘  │                   │  │  ├─ Events        │  │ │
+│  └──────────────┘                   │  │  ├─ Save Loop     │  │ │
+│         ▲                           │  │  └────────────────┘  │ │
+│         │                           │  └────────────────────────┘ │
+│  ┌──────────────┐                   │                               │
+│  │  Packet      │                   │  ┌────────────────────────┐  │
+│  │  Processor   │                   │  │ Data Stores            │  │
+│  │  ┌────────┐  │                   │  │  ├─ worlds/            │  │
+│  │  │ Text   │  │                   │  │  ├─ players/           │  │
+│  │  │ (Type 2,3)    │                   │  │  ├─ guilds/            │  │
+│  │  │ Binary │  │                   │  │  ├─ db/                │  │
+│  │  │ (Type 4)    │                   │  │  └─ items.dat         │  │
+│  │  └────────┘  │                   │  └────────────────────────┘  │
+│  └──────────────┘                   │                               │
+└─────────────────────────────────────────────────────────────────┘`}</code></pre>
+      </section>
 
-        <div className="card">
-          <h2><FolderIcon /> Module Layout</h2>
-          <p>The project follows a layered directory structure:</p>
-          <pre>
-            <span className="pre-label">tree</span>
-            <code>{`src/
-├── core/
-│   ├── Server.cpp        # Main server loop
-│   ├── PacketHandler.cpp # Routes packet types to handlers
-│   └── EventBus.cpp      # Publish/subscribe for internal events
-├── network/
-│   ├── ENetHost.cpp      # ENet host/peer lifecycle wrapper
-│   ├── ByteStream.cpp    # Binary read/write helper
-│   └── Packet.cpp        # GameUpdatePacket & TextParse types
-├── scripting/
-│   ├── LuaRuntime.cpp    # sol2 state and script loader
-│   ├── LuaPacketAPI.cpp  # Lua bindings for packet access
-│   └── Scheduler.cpp     # Periodic & deferred task runner
-├── http/
-│   └── Resolver.cpp      # cpp-httplib login resolver
-└── config/
-    └── Config.cpp        # JSON config loader`}</code>
-          </pre>
-        </div>
-
-        <div className="card">
-          <h2><RefreshIcon /> Event Loop</h2>
-          <p>
-            The main loop polls ENet at a configurable tick rate (default <code>16 ms</code>).
-            Each poll drains all pending network events before yielding to the scheduler.
-          </p>
-          <div className="steps">
-            <div className="step">
-              <div className="step-num">1</div>
-              <div className="step-content">
-                <h4>ENet Poll</h4>
-                <p><code>enet_host_service()</code> blocks for up to the tick interval, returning events.</p>
-              </div>
-            </div>
-            <div className="step">
-              <div className="step-num">2</div>
-              <div className="step-content">
-                <h4>Event Dispatch</h4>
-                <p>CONNECT/DISCONNECT events update the peer map; RECEIVE events go to PacketHandler.</p>
-              </div>
-            </div>
-            <div className="step">
-              <div className="step-num">3</div>
-              <div className="step-content">
-                <h4>Packet Decode</h4>
-                <p>PacketHandler reads the type header and calls the registered C++ or Lua handler.</p>
-              </div>
-            </div>
-            <div className="step">
-              <div className="step-num">4</div>
-              <div className="step-content">
-                <h4>Scheduler Tick</h4>
-                <p>Pending timers and deferred Lua tasks are executed after network events drain.</p>
-              </div>
-            </div>
+      <section style={{ marginBottom: "2rem" }}>
+        <h2>Core Modules</h2>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1rem" }}>
+          <div style={{ border: "1px solid #eee", borderRadius: "8px", padding: "1.5rem" }}>
+            <h3 style={{ marginTop: 0 }}>ENet Network Layer</h3>
+            <ul>
+              <li>UDP-based reliable/unreliable channels</li>
+              <li>CRC32 checksum + Range Coder compression</li>
+              <li>New Packet Protocol (14-byte header + payload)</li>
+              <li>1024 max peers, 2 channels</li>
+            </ul>
+          </div>
+          <div style={{ border: "1px solid #eee", borderRadius: "8px", padding: "1.5rem" }}>
+            <h3 style={{ marginTop: 0 }}>Game Loop (Main Thread)</h3>
+            <ul>
+              <li>Single-threaded event loop</li>
+              <li>ENet service with 3ms timeout</li>
+              <li>World tick processing (~1450ms interval)</li>
+              <li>Player state updates</li>
+              <li>Scheduled events &amp; saves</li>
+            </ul>
+          </div>
+          <div style={{ border: "1px solid #eee", borderRadius: "8px", padding: "1.5rem" }}>
+            <h3 style={{ marginTop: 0 }}>Packet Processor</h3>
+            <ul>
+              <li>Text packets (type 2, 3): dialog, chat, commands</li>
+              <li>Binary packets (type 4): movement, actions</li>
+              <li>gamepacket_t builder system</li>
+              <li>PlayerMoving struct serialization</li>
+            </ul>
+          </div>
+          <div style={{ border: "1px solid #eee", borderRadius: "8px", padding: "1.5rem" }}>
+            <h3 style={{ marginTop: 0 }}>HTTP Resolver</h3>
+            <ul>
+              <li>TCP server on port 80</li>
+              <li>Returns server_data.php format</li>
+              <li>Requires Admin privileges</li>
+              <li>Thread detached from main loop</li>
+            </ul>
           </div>
         </div>
+      </section>
 
-        <div className="card">
-          <h2><ThreadIcon /> Threading Model</h2>
-          <p>
-            buremtopia intentionally avoids multi-threading on the hot path to eliminate lock
-            contention. The HTTP resolver runs on a separate thread managed by
-            <code>cpp-httplib</code>, but all ENet and Lua execution happens on the main thread.
-          </p>
-          <div className="alert alert-warn">
-            <WarnIcon />
-            <span>
-              Never call ENet or Lua APIs from the HTTP thread. Use a thread-safe queue to
-              post events back to the main event loop.
-            </span>
-          </div>
-        </div>
+      <section style={{ marginBottom: "2rem" }}>
+        <h2>Data Flow</h2>
+        <ol>
+          <li><strong>Client Connect</strong> → ENet CONNECT event → allocate Player struct → send welcome</li>
+          <li><strong>Login</strong> → Type 2/3 packet with tankIDName/tankIDPass → player_login() → validate → send OSM</li>
+          <li><strong>World Entry</strong> → join_request → load world JSON → send world data → spawn player</li>
+          <li><strong>Gameplay</strong> → Type 4 binary packets → unpack PlayerMoving → process action → broadcast</li>
+          <li><strong>Save</strong> → Periodic (5 min) + on disconnect → serialize to JSON</li>
+        </ol>
+      </section>
 
-        <footer className="footer">// buremtopia Documentation · Server Architecture</footer>
-      </div>
-    </>
+      <section style={{ marginBottom: "2rem" }}>
+        <h2>Threading Model</h2>
+        <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <thead>
+            <tr style={{ background: "#f5f5f5" }}>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Thread</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Purpose</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Sync</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style={{ padding: "0.75rem", border: "1px solid #eee" }}><strong>Main</strong></td>
+              <td style={{ padding: "0.75rem", border: "1px solid #eee" }}>ENet service, game logic, world updates, player processing</td>
+              <td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Single-threaded</td>
+            </tr>
+            <tr>
+              <td style={{ padding: "0.75rem", border: "1px solid #eee" }}><strong>Resolver</strong></td>
+              <td style={{ padding: "0.75rem", border: "1px solid #eee" }}>HTTP server on port 80</td>
+              <td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Detached, read-only access</td>
+            </tr>
+            <tr>
+              <td style={{ padding: "0.75rem", border: "1px solid #eee" }}><strong>Auto-save</strong></td>
+              <td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Periodic world/player saves</td>
+              <td style={{ padding: "0.75rem", border: "1px solid #eee" }}>f_saving_ flag</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Key Global State</h2>
+        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Network
+ENetHost* server;                    // ENet server instance
+int server_port = 53181;             // UDP port
+
+// Game State
+vector<World> worlds;                // All loaded worlds
+vector<ItemDB> items;                // Item database from items.dat
+vector<Guild> guilds;                // Guild system
+
+// Security
+struct Server_Security {
+    int login_count = 0;
+    long long login_time = 0;
+    vector<string> ridbans;
+    vector<pair<string, long long>> banned_ip_temporary;
+    bool restart_server_status = false;
+    // ...
+} Server_Security;
+
+// Events
+struct Hide_N_Seek { ... };
+struct Crypto_Update { ... };
+struct World_Stuff { ... };`}</code></pre>
+      </section>
+    </article>
   );
 }
