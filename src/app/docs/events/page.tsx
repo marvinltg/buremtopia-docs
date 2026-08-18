@@ -3,7 +3,7 @@
 export default function EventsPage() {
   return (
     <article style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto", lineHeight: 1.7 }}>
-      <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #eee" }}>
+      <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #333" }}>
         <h1>Game Events</h1>
         <p style={{ color: "#666", fontSize: "1.1rem" }}>Hide & Seek, Beach Party, Crypto, Daily Quests, and timers</p>
       </header>
@@ -11,7 +11,7 @@ export default function EventsPage() {
       <section style={{ marginBottom: "2rem" }}>
         <h2>Event System Overview</h2>
         <p>GTPS3 supports several scheduled in-game events. Each has global state, timer configuration, and world integration. Events are triggered from the main loop based on time thresholds.</p>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`struct EventManager {
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`struct EventManager {
     // Hide & Seek
     struct {
         bool active;
@@ -61,7 +61,7 @@ export default function EventsPage() {
           <li>Last hider wins rewards</li>
         </ol>
         <h3>Flow</h3>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Start
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Start
 start_hide_n_seek();
   - pick event world
   - teleport players
@@ -95,7 +95,7 @@ end_hide_n_seek();
       <section style={{ marginBottom: "2rem" }}>
         <h2>Crypto Price Update</h2>
         <p>The server fetches crypto prices over HTTP and displays them in-game:</p>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Periodic HTTP fetch
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Periodic HTTP fetch
 void update_crypto_prices() {
     if (now_ms() - crypto.last_fetch < CYCLE) return;
 
@@ -116,7 +116,7 @@ if (crypto.prices_changed) {
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>Daily Quests</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`struct Quest {
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`struct Quest {
     int questID;
     string title;
     string description;
@@ -142,17 +142,17 @@ if (now_ms() >= quest.reset_time) {
         <h2>Timer Configuration</h2>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
-            <tr style={{ background: "#f5f5f5" }}>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Timer</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Interval</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Purpose</th>
+            <tr style={{ background: "#1c1c1c" }}>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Timer</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Interval</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Purpose</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Event Check</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>30s</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Scan scheduled event triggers</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>World Tick</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>~1.45s</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>NPCs, machines, crops</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Crypto Fetch</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>configurable</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>HTTP price refresh</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Auto-Save</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>~5 min</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Persist worlds/players</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Event Check</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>30s</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Scan scheduled event triggers</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>World Tick</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>~1.45s</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>NPCs, machines, crops</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Crypto Fetch</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>configurable</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>HTTP price refresh</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Auto-Save</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>~5 min</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Persist worlds/players</td></tr>
           </tbody>
         </table>
       </section>

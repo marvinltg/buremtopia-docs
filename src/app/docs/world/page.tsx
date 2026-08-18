@@ -3,14 +3,14 @@
 export default function WorldPage() {
   return (
     <article style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto", lineHeight: 1.7 }}>
-      <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #eee" }}>
+      <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #333" }}>
         <h1>World System</h1>
         <p style={{ color: "#666", fontSize: "1.1rem" }}>World loading, blocks, machines, NPCs, and world persistence</p>
       </header>
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>World Struct</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`struct World {
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`struct World {
     string name;                 // world name (uppercase)
     string owner;                // owner account name
     bool is_lock;                // requires world lock
@@ -71,23 +71,23 @@ export default function WorldPage() {
         <p>Each world maintains four parallel arrays indexed by <code>y * width + x</code>:</p>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
-            <tr style={{ background: "#f5f5f5" }}>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Layer</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Purpose</th>
+            <tr style={{ background: "#1c1c1c" }}>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Layer</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Purpose</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>front</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Physical blocks (walls, floors, main blocks)</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>background_tiles</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Background objects (back walls, windows)</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>foreground</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Foreground items (trees, seeds, signs)</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>flags / parents</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Tile metadata and linkage</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>front</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Physical blocks (walls, floors, main blocks)</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>background_tiles</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Background objects (back walls, windows)</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>foreground</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Foreground items (trees, seeds, signs)</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>flags / parents</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Tile metadata and linkage</td></tr>
           </tbody>
         </table>
       </section>
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>Block Placement & Break</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Placement flow (from type 4 action handler)
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Placement flow (from type 4 action handler)
 1. Validate tile bounds (0 <= x < width, 0 <= y < height)
 2. Check permissions (owner / access list / lock)
 3. Validate item is a placeable block
@@ -106,7 +106,7 @@ export default function WorldPage() {
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>World Tick & Auto-Save</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Main loop calls loop_worlds() each iteration
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Main loop calls loop_worlds() each iteration
 for (World& w : worlds) {
     if (now_ms() - w.last_update >= w.update_interval) {
         // Process NPCs, machines, crops, timers
@@ -126,16 +126,16 @@ for (World& w : worlds) {
         <h2>World Permissions</h2>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
-            <tr style={{ background: "#f5f5f5" }}>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Type</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Behavior</th>
+            <tr style={{ background: "#1c1c1c" }}>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Type</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Behavior</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Public</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Anyone can join, place, break</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Locked</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Requires world lock item to edit</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Restricted</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Only access_list members can join</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Private</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Only owner + access_list; invisible in list</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Public</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Anyone can join, place, break</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Locked</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Requires world lock item to edit</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Restricted</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Only access_list members can join</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Private</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Only owner + access_list; invisible in list</td></tr>
           </tbody>
         </table>
       </section>
@@ -154,7 +154,7 @@ for (World& w : worlds) {
 
       <section>
         <h2>World Persistence Format</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// JSON structure
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// JSON structure
 {
   "name": "START",
   "owner": "admin",

@@ -3,7 +3,7 @@
 export default function ItemsPage() {
   return (
     <article style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto", lineHeight: 1.7 }}>
-      <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #eee" }}>
+      <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #333" }}>
         <h1>Items & Blocks</h1>
         <p style={{ color: "#666", fontSize: "1.1rem" }}>ItemDB, block types, clothing, and item properties</p>
       </header>
@@ -11,7 +11,7 @@ export default function ItemsPage() {
       <section style={{ marginBottom: "2rem" }}>
         <h2>ItemDB</h2>
         <p>The server maintains a global item database loaded from <code>items.dat</code> at startup. Each entry defines an item's properties.</p>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`struct ItemDB {
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`struct ItemDB {
     int id;                 // item id (1..many)
     string name;            // item display name
     string texture;         // texture file name
@@ -41,7 +41,7 @@ export default function ItemsPage() {
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>Block Types (Enum)</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`enum BlockTypes {
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`enum BlockTypes {
     BT_NONE = 0,
     BT_BLOCK = 1,          // solid block
     BT_ACTION = 2,         // action block
@@ -75,19 +75,19 @@ export default function ItemsPage() {
         <p>Character appearance uses 7 base clothing slots plus hat extras:</p>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
-            <tr style={{ background: "#f5f5f5" }}>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Index</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Slot</th>
+            <tr style={{ background: "#1c1c1c" }}>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Index</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Slot</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Hair (hat)</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>1</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Shirt</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>2</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Pants</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>3</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Feet (shoes)</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>4</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Face (mask)</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>5</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Hand (hand item)</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>6</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Back (back item)</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>0</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Hair (hat)</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>1</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Shirt</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>2</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Pants</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>3</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Feet (shoes)</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>4</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Face (mask)</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>5</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Hand (hand item)</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>6</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Back (back item)</td></tr>
           </tbody>
         </table>
         <p>Color fields (hair, eyes, skin) are separate int values. The <code>hats</code> vector holds additional wearable hats (meta items).</p>
@@ -97,29 +97,29 @@ export default function ItemsPage() {
         <h2>Special Item Behaviors</h2>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
-            <tr style={{ background: "#f5f5f5" }}>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Item</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Behavior</th>
+            <tr style={{ background: "#1c1c1c" }}>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Item</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Behavior</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>World Lock</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Ownership tile locking; reserved tile count</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Seeds</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Plant -&gt; grow over time -&gt; harvest fruit</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Signs</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Stores text in tile_strings; renders on canvas</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Vending Machine</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Sells items for currency; stock tracking</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Chemical Combiner</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Combines inputs into output item</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Geiger Counter</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Detects radioactive items; counter value</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Tomorrow Machine</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>RNG machine; roll chances -&gt; output</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Dice</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Random 1-6; message broadcast</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Music Player</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Plays audio track; sets world music</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Weather Provider</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Sets world weather effect</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>World Lock</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Ownership tile locking; reserved tile count</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Seeds</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Plant -&gt; grow over time -&gt; harvest fruit</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Signs</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Stores text in tile_strings; renders on canvas</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Vending Machine</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Sells items for currency; stock tracking</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Chemical Combiner</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Combines inputs into output item</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Geiger Counter</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Detects radioactive items; counter value</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Tomorrow Machine</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>RNG machine; roll chances -&gt; output</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Dice</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Random 1-6; message broadcast</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Music Player</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Plays audio track; sets world music</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Weather Provider</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Sets world weather effect</td></tr>
           </tbody>
         </table>
       </section>
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>Item Flags</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Bitmask values (subset)
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Bitmask values (subset)
 const int ITEM_FLAG_BLOCK       = 1;    // placeable block
 const int ITEM_FLAG_FOREGROUND  = 2;    // foreground object
 const int ITEM_FLAG_BACKGROUND  = 4;    // background tile
@@ -134,7 +134,7 @@ const int ITEM_FLAG_SHIELD      = 512;  // special vfx`}</code></pre>
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>Drops & Harvesting</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// On block break, roll drops:
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// On block break, roll drops:
 for (int i = 0; i < 3; i++) {
     if (item->drops[i] != 0) {
         // drop_chance% chance to drop item

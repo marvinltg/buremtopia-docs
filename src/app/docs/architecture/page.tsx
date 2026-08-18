@@ -3,14 +3,14 @@
 export default function ArchitecturePage() {
   return (
     <article style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto", lineHeight: 1.7 }}>
-      <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #eee" }}>
+      <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #333" }}>
         <h1>System Architecture</h1>
         <p style={{ color: "#666", fontSize: "1.1rem" }}>High-level overview of GTPS3 server components and data flow</p>
       </header>
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>Component Diagram</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto", fontSize: "0.85rem" }}><code>{`┌─────────────────────────────────────────────────────────────────┐
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto", fontSize: "0.85rem" }}><code>{`┌─────────────────────────────────────────────────────────────────┐
 │                        GTPS3 SERVER                              │
 ├─────────────────────────────────────────────────────────────────┤
 │  ┌──────────────┐  ┌──────────────┐  ┌────────────────────────┐ │
@@ -39,7 +39,7 @@ export default function ArchitecturePage() {
       <section style={{ marginBottom: "2rem" }}>
         <h2>Core Modules</h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1rem" }}>
-          <div style={{ border: "1px solid #eee", borderRadius: "8px", padding: "1.5rem" }}>
+          <div style={{ border: "1px solid #333", borderRadius: "8px", padding: "1.5rem" }}>
             <h3 style={{ marginTop: 0 }}>ENet Network Layer</h3>
             <ul>
               <li>UDP-based reliable/unreliable channels</li>
@@ -48,7 +48,7 @@ export default function ArchitecturePage() {
               <li>1024 max peers, 2 channels</li>
             </ul>
           </div>
-          <div style={{ border: "1px solid #eee", borderRadius: "8px", padding: "1.5rem" }}>
+          <div style={{ border: "1px solid #333", borderRadius: "8px", padding: "1.5rem" }}>
             <h3 style={{ marginTop: 0 }}>Game Loop (Main Thread)</h3>
             <ul>
               <li>Single-threaded event loop</li>
@@ -58,7 +58,7 @@ export default function ArchitecturePage() {
               <li>Scheduled events &amp; saves</li>
             </ul>
           </div>
-          <div style={{ border: "1px solid #eee", borderRadius: "8px", padding: "1.5rem" }}>
+          <div style={{ border: "1px solid #333", borderRadius: "8px", padding: "1.5rem" }}>
             <h3 style={{ marginTop: 0 }}>Packet Processor</h3>
             <ul>
               <li>Text packets (type 2, 3): dialog, chat, commands</li>
@@ -67,7 +67,7 @@ export default function ArchitecturePage() {
               <li>PlayerMoving struct serialization</li>
             </ul>
           </div>
-          <div style={{ border: "1px solid #eee", borderRadius: "8px", padding: "1.5rem" }}>
+          <div style={{ border: "1px solid #333", borderRadius: "8px", padding: "1.5rem" }}>
             <h3 style={{ marginTop: 0 }}>HTTP Resolver</h3>
             <ul>
               <li>TCP server on port 80</li>
@@ -94,27 +94,27 @@ export default function ArchitecturePage() {
         <h2>Threading Model</h2>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
-            <tr style={{ background: "#f5f5f5" }}>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Thread</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Purpose</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Sync</th>
+            <tr style={{ background: "#1c1c1c" }}>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Thread</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Purpose</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Sync</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td style={{ padding: "0.75rem", border: "1px solid #eee" }}><strong>Main</strong></td>
-              <td style={{ padding: "0.75rem", border: "1px solid #eee" }}>ENet service, game logic, world updates, player processing</td>
-              <td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Single-threaded</td>
+              <td style={{ padding: "0.75rem", border: "1px solid #333" }}><strong>Main</strong></td>
+              <td style={{ padding: "0.75rem", border: "1px solid #333" }}>ENet service, game logic, world updates, player processing</td>
+              <td style={{ padding: "0.75rem", border: "1px solid #333" }}>Single-threaded</td>
             </tr>
             <tr>
-              <td style={{ padding: "0.75rem", border: "1px solid #eee" }}><strong>Resolver</strong></td>
-              <td style={{ padding: "0.75rem", border: "1px solid #eee" }}>HTTP server on port 80</td>
-              <td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Detached, read-only access</td>
+              <td style={{ padding: "0.75rem", border: "1px solid #333" }}><strong>Resolver</strong></td>
+              <td style={{ padding: "0.75rem", border: "1px solid #333" }}>HTTP server on port 80</td>
+              <td style={{ padding: "0.75rem", border: "1px solid #333" }}>Detached, read-only access</td>
             </tr>
             <tr>
-              <td style={{ padding: "0.75rem", border: "1px solid #eee" }}><strong>Auto-save</strong></td>
-              <td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Periodic world/player saves</td>
-              <td style={{ padding: "0.75rem", border: "1px solid #eee" }}>f_saving_ flag</td>
+              <td style={{ padding: "0.75rem", border: "1px solid #333" }}><strong>Auto-save</strong></td>
+              <td style={{ padding: "0.75rem", border: "1px solid #333" }}>Periodic world/player saves</td>
+              <td style={{ padding: "0.75rem", border: "1px solid #333" }}>f_saving_ flag</td>
             </tr>
           </tbody>
         </table>
@@ -122,7 +122,7 @@ export default function ArchitecturePage() {
 
       <section>
         <h2>Key Global State</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Network
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Network
 ENetHost* server;                    // ENet server instance
 int server_port = 53181;             // UDP port
 

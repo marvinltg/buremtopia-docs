@@ -3,14 +3,14 @@
 export default function PlayerPage() {
   return (
     <article style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto", lineHeight: 1.7 }}>
-      <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #eee" }}>
+      <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #333" }}>
         <h1>Player System</h1>
         <p style={{ color: "#666", fontSize: "1.1rem" }}>Player state, inventory, clothes, playmods, and roles</p>
       </header>
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>Player Struct (Core Fields)</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`struct Player {
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`struct Player {
     // Identity
     int netID;                    // network peer id
     int userID;                   // account id
@@ -79,17 +79,17 @@ export default function PlayerPage() {
         <h2>Roles & Permissions</h2>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
-            <tr style={{ background: "#f5f5f5" }}>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Role</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>ID</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Permissions</th>
+            <tr style={{ background: "#1c1c1c" }}>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Role</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>ID</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Permissions</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Admin</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>1</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>All commands, /setrole, world ownership override</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Developer</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>2</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Dev items, world edit tools</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Moderator</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>3</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Mute, kick, ban, vanish</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Supporter</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>4</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Basic helper commands</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Admin</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>1</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>All commands, /setrole, world ownership override</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Developer</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>2</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Dev items, world edit tools</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Moderator</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>3</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Mute, kick, ban, vanish</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Supporter</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>4</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Basic helper commands</td></tr>
           </tbody>
         </table>
       </section>
@@ -98,17 +98,17 @@ export default function PlayerPage() {
         <h2>Currency System</h2>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
-            <tr style={{ background: "#f5f5f5" }}>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Currency</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Field</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Description</th>
+            <tr style={{ background: "#1c1c1c" }}>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Currency</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Field</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Description</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Gems</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>gems</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Primary soft currency</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>World Locks</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>world_locks</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Hard currency (WL)</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Diamond Locks</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>diamond_locks</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Rare currency (DL)</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Blue Gem Locks</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>bluegem_locks</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>High-tier currency (BGL)</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Gems</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>gems</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Primary soft currency</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>World Locks</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>world_locks</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Hard currency (WL)</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Diamond Locks</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>diamond_locks</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Rare currency (DL)</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Blue Gem Locks</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>bluegem_locks</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>High-tier currency (BGL)</td></tr>
           </tbody>
         </table>
         <p>Currency is persisted in the player JSON and synced to the client via the OSM packet and item deliveries.</p>
@@ -131,7 +131,7 @@ export default function PlayerPage() {
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>Inventory Model</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`struct InventoryItem {
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`struct InventoryItem {
     int itemID;
     long long count;
 };

@@ -3,14 +3,14 @@
 export default function LoginPage() {
   return (
     <article style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto", lineHeight: 1.7 }}>
-      <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #eee" }}>
+      <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #333" }}>
         <h1>Login Flow & Authentication</h1>
         <p style={{ color: "#666", fontSize: "1.1rem" }}>Complete sequence from ENet connect to world entry</p>
       </header>
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>Sequence Diagram</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto", fontSize: "0.85rem" }}><code>{`Client                          Server
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto", fontSize: "0.85rem" }}><code>{`Client                          Server
   |                                |
   +- ENet Connect ---------------->|  CONNECT event
   |                                |  allocate Player*
@@ -51,26 +51,26 @@ export default function LoginPage() {
         <h2>Login Packet Fields</h2>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
-            <tr style={{ background: "#f5f5f5" }}>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Field</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Example</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Description</th>
+            <tr style={{ background: "#1c1c1c" }}>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Field</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Example</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Description</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>tankIDName</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>MyUsername</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Account username</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>tankIDPass</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>MyPassword</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Account password (plaintext)</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>requestedName</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>""</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Name change request (usually empty)</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>f</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>1</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Platform flag</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>protocol</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>225</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Protocol version (must match server)</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>game_version</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>5.53</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Client game version</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>fz</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>23314424</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Fingerprint/hash</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>klv</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>037fbb624f...</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Key lineage value (64-char hex)</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>hash</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>466084983</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Account hash</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>mac</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>9c:12:21:08:xx:xx:xx</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>MAC address</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>rid</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>026F4146...</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Device RID (32-char hex)</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>country</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>us</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Country code</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>platformID</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0,1,1</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Platform identifiers</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>tankIDName</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>MyUsername</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Account username</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>tankIDPass</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>MyPassword</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Account password (plaintext)</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>requestedName</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>""</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Name change request (usually empty)</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>f</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>1</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Platform flag</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>protocol</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>225</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Protocol version (must match server)</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>game_version</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>5.53</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Client game version</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>fz</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>23314424</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Fingerprint/hash</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>klv</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>037fbb624f...</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Key lineage value (64-char hex)</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>hash</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>466084983</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Account hash</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>mac</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>9c:12:21:08:xx:xx:xx</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>MAC address</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>rid</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>026F4146...</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Device RID (32-char hex)</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>country</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>us</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Country code</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>platformID</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>0,1,1</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Platform identifiers</td></tr>
           </tbody>
         </table>
       </section>
@@ -94,7 +94,7 @@ export default function LoginPage() {
       <section style={{ marginBottom: "2rem" }}>
         <h2>Server-Side Processing</h2>
         <h3>Rate Limiting</h3>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Reset counters every 6.5 seconds
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Reset counters every 6.5 seconds
 if (Server_Security.login_time + 6500 < now_ms()) {
     Server_Security.login_count = 0;
     Server_Security.update_item_data = 0;
@@ -125,7 +125,7 @@ Server_Security.login_count++;`}</code></pre>
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>Join Request & World Entry</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Client sends (type 3):
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Client sends (type 3):
 action|join_request|WORLD_NAME
 
 // Server processes:

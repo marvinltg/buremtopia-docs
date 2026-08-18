@@ -3,7 +3,7 @@
 export default function PacketsPage() {
   return (
     <article style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto", lineHeight: 1.7 }}>
-      <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #eee" }}>
+      <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #333" }}>
         <h1>Packet System</h1>
         <p style={{ color: "#666", fontSize: "1.1rem" }}>gamepacket_t serialization, text vs binary packets, and message IDs</p>
       </header>
@@ -11,7 +11,7 @@ export default function PacketsPage() {
       <section style={{ marginBottom: "2rem" }}>
         <h2>gamepacket_t Structure</h2>
         <p>The core packet builder used for all type 4 (binary) packets. Uses a large fixed buffer followed by typed data inserts.</p>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`class gamepacket_t {
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`class gamepacket_t {
 public:
     unsigned char buffer[1024 * 256];  // 256KB packet buffer
     unsigned int index = 0;            // write cursor
@@ -34,19 +34,19 @@ public:
         <h2>Type Markers (Serialization)</h2>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
-            <tr style={{ background: "#f5f5f5" }}>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Marker Byte</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Type</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Wire Format</th>
+            <tr style={{ background: "#1c1c1c" }}>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Marker Byte</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Type</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Wire Format</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0x00</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>byte</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0x00 + 1 byte</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0x01</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>int32/uint32/float</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0x01 + 4 bytes LE</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0x02</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>string</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0x02 + int32 len + bytes</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0x03</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>array (int)</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0x03 + int32 count + 4-byte items</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0x05</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>struct/raw</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0x05 + length-prefixed</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0x09</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>special</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0x09 + custom format</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>0x00</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>byte</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>0x00 + 1 byte</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>0x01</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>int32/uint32/float</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>0x01 + 4 bytes LE</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>0x02</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>string</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>0x02 + int32 len + bytes</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>0x03</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>array (int)</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>0x03 + int32 count + 4-byte items</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>0x05</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>struct/raw</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>0x05 + length-prefixed</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>0x09</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>special</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>0x09 + custom format</td></tr>
           </tbody>
         </table>
       </section>
@@ -55,25 +55,25 @@ public:
         <h2>Message Types</h2>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
-            <tr style={{ background: "#f5f5f5" }}>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Type</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Name</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Format</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Description</th>
+            <tr style={{ background: "#1c1c1c" }}>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Type</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Name</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Format</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Description</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>1</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Welcome</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Text</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Connection handshake ACK</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>2</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Text</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Text (|)</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Login, chat, dialogs, commands</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>3</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Extended Text</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Text (|)</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Requires bypass flag; join requests, purchases</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>4</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Binary</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Serialized</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Movement, actions, world, spawn, OSM</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>1</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Welcome</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Text</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Connection handshake ACK</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>2</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Text</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Text (|)</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Login, chat, dialogs, commands</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>3</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Extended Text</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Text (|)</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Requires bypass flag; join requests, purchases</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>4</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Binary</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Serialized</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Movement, actions, world, spawn, OSM</td></tr>
           </tbody>
         </table>
       </section>
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>Binary Packet Assembly</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Example: OnSpawn packet (type 4)
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Example: OnSpawn packet (type 4)
 gamepacket_t pack;
 pack.Insert(4);                      // message type (binary)
 pack.Insert(2);                      // action type (OnSpawn)
@@ -105,7 +105,7 @@ send_raw(peer, pack.buffer, pack.index);`}</code></pre>
       <section style={{ marginBottom: "2rem" }}>
         <h2>Text Packet Format</h2>
         <p>Text packets use pipe-delimited key-value pairs. Client to Server for type 2/3:</p>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`tankIDName|user|tankIDPass|pass|requestedName||f|1|protocol|225|game_version|5.53|fz|23314424|klv|...|hash|...|mac|...|rid|...|country|us|platformID|0,1,1
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`tankIDName|user|tankIDPass|pass|requestedName||f|1|protocol|225|game_version|5.53|fz|23314424|klv|...|hash|...|mac|...|rid|...|country|us|platformID|0,1,1
 
 // Chat message
 playerChat|text|Hello world
@@ -121,29 +121,29 @@ action|join_request|WORLD_NAME`}</code></pre>
         <h2>Action IDs</h2>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
-            <tr style={{ background: "#f5f5f5" }}>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Action ID</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Name</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Direction</th>
+            <tr style={{ background: "#1c1c1c" }}>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Action ID</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Name</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Direction</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnPlayerLeft</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -&gt; Client</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>1</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnPlayerMoving</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Both</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>2</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSpawn</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -&gt; Client</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>3</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnRemove</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -&gt; Client</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>4</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendMapData</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -&gt; Client</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>7</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendTileUpdateData</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Both</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>9</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendTileUpdateDataMultiple</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -&gt; Client</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>11</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendTileDamage</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Both</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>12</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendPingRequest</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -&gt; Client</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>13</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendPingResponse</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Client -&gt; Srv</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>19</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendInventoryState</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -&gt; Client</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>20</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendItemDatabaseData</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -&gt; Client</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>21</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendTileData</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -&gt; Client</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>22</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnReconnect</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -&gt; Client</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>26</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendGameModes</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -&gt; Client</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>27</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendPlayerMessage</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -&gt; Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>0</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>OnPlayerLeft</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Srv -&gt; Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>1</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>OnPlayerMoving</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Both</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>2</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>OnSpawn</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Srv -&gt; Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>3</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>OnRemove</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Srv -&gt; Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>4</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>OnSendMapData</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Srv -&gt; Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>7</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>OnSendTileUpdateData</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Both</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>9</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>OnSendTileUpdateDataMultiple</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Srv -&gt; Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>11</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>OnSendTileDamage</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Both</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>12</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>OnSendPingRequest</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Srv -&gt; Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>13</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>OnSendPingResponse</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Client -&gt; Srv</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>19</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>OnSendInventoryState</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Srv -&gt; Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>20</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>OnSendItemDatabaseData</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Srv -&gt; Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>21</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>OnSendTileData</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Srv -&gt; Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>22</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>OnReconnect</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Srv -&gt; Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>26</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>OnSendGameModes</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Srv -&gt; Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>27</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>OnSendPlayerMessage</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Srv -&gt; Client</td></tr>
           </tbody>
         </table>
       </section>
@@ -151,7 +151,7 @@ action|join_request|WORLD_NAME`}</code></pre>
       <section style={{ marginBottom: "2rem" }}>
         <h2>PlayerMoving Struct</h2>
         <p>Used for type 4 binary movement packets (action 1):</p>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`struct PlayerMoving {
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`struct PlayerMoving {
     int netID;
     int characterState;
     int punchX, punchY;      // punch target
@@ -169,7 +169,7 @@ action|join_request|WORLD_NAME`}</code></pre>
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>Packing/Unpacking Flow</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// CLIENT TO SERVER (incoming type 4)
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// CLIENT TO SERVER (incoming type 4)
 // 1. Validate packet header (61-byte, 4-byte length)
 // 2. Decode packed chunks with bit-reading
 // 3. Unpack into PlayerMoving fields
@@ -185,7 +185,7 @@ action|join_request|WORLD_NAME`}</code></pre>
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>Packet Counters (Anti-Flood)</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Per-peer monitoring (anti-flood)
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Per-peer monitoring (anti-flood)
 pInfo(peer)->all_packets++;      // total received
 pInfo(peer)->pps++;              // per-second counter
 pInfo(peer)->last_packet = now_ms();

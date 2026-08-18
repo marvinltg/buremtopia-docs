@@ -3,7 +3,7 @@
 export default function HttpPage() {
   return (
     <article style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto", lineHeight: 1.7 }}>
-      <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #eee" }}>
+      <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #333" }}>
         <h1>HTTP Resolver (Server Data)</h1>
         <p style={{ color: "#666", fontSize: "1.1rem" }}>TCP server on port 80 returning server connection data to clients</p>
       </header>
@@ -16,7 +16,7 @@ export default function HttpPage() {
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>Implementation</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`static void resolver_loop(int game_port) {
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`static void resolver_loop(int game_port) {
     WSADATA wsadata;
     if (WSAStartup(MAKEWORD(2, 2), &wsadata) != 0) return;
     
@@ -74,22 +74,22 @@ export default function HttpPage() {
         <h2>Response Format</h2>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
-            <tr style={{ background: "#f5f5f5" }}>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Field</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Example Value</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Description</th>
+            <tr style={{ background: "#1c1c1c" }}>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Field</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Example Value</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Description</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>server</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>127.0.0.1</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Main game server IP</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>port</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>53181</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Game UDP port</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>type</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>1</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Server type (1=main)</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>type2</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>1</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Secondary type</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>beta_server</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>127.0.0.1</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Beta server IP</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>beta_port</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>53181</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Beta server port</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>beta_type</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>1</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Beta server type</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>meta</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>localhost</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Metadata identifier</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>RTENDMARKERBS1001</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>(fixed)</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>End-of-response marker</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>server</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>127.0.0.1</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Main game server IP</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>port</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>53181</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Game UDP port</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>type</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>1</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Server type (1=main)</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>type2</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>1</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Secondary type</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>beta_server</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>127.0.0.1</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Beta server IP</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>beta_port</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>53181</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Beta server port</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>beta_type</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>1</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Beta server type</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>meta</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>localhost</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Metadata identifier</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>RTENDMARKERBS1001</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>(fixed)</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>End-of-response marker</td></tr>
           </tbody>
         </table>
       </section>
@@ -108,16 +108,16 @@ export default function HttpPage() {
       <section style={{ marginBottom: "2rem" }}>
         <h2>Requirements & Caveats</h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "1rem" }}>
-          <div style={{ border: "1px solid #ffcccc", background: "#fff5f5", borderRadius: "8px", padding: "1rem" }}>
-            <h4 style={{ marginTop: 0, color: "#c00" }}>Administrator Required</h4>
+          <div style={{ border: "1px solid #3d2020", background: "#2a1a1a", borderRadius: "8px", padding: "1rem" }}>
+            <h4 style={{ marginTop: 0, color: "#ff6b6b" }}>Administrator Required</h4>
             <p>Binding to port 80 requires elevated privileges on Windows. Run server as Administrator.</p>
           </div>
-          <div style={{ border: "1px solid #ccccff", background: "#f5f5ff", borderRadius: "8px", padding: "1rem" }}>
-            <h4 style={{ marginTop: 0, color: "#00c" }}>HTTPS Not Supported</h4>
+          <div style={{ border: "1px solid #20203d", background: "#1a1a2a", borderRadius: "8px", padding: "1rem" }}>
+            <h4 style={{ marginTop: 0, color: "#6b8bff" }}>HTTPS Not Supported</h4>
             <p>Resolver uses plain HTTP. Modern clients may require HTTPS or certificate pinning.</p>
           </div>
-          <div style={{ border: "1px solid #ccffcc", background: "#f5fff5", borderRadius: "8px", padding: "1rem" }}>
-            <h4 style={{ marginTop: 0, color: "#080" }}>Thread Safety</h4>
+          <div style={{ border: "1px solid #203d20", background: "#1a2a1a", borderRadius: "8px", padding: "1rem" }}>
+            <h4 style={{ marginTop: 0, color: "#6bff6b" }}>Thread Safety</h4>
             <p>Resolver runs in detached thread. Uses read-only access to <code>server_port</code>.</p>
           </div>
         </div>
@@ -126,7 +126,7 @@ export default function HttpPage() {
       <section style={{ marginBottom: "2rem" }}>
         <h2>Enabling the Resolver</h2>
         <p>The resolver thread is currently commented out in <code>main()</code>:</p>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// std::thread resolver(resolver_loop, server_port);
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// std::thread resolver(resolver_loop, server_port);
 // resolver.detach();`}</code></pre>
         <p>Uncomment and ensure the server is run as Administrator to enable.</p>
       </section>

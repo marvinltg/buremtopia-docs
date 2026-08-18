@@ -65,7 +65,7 @@ export default function DocsIndexPage() {
 
       <section>
         <h2>Quick Start</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`# Build & Run Server
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`# Build & Run Server
 cd base-gt3
 # Open SecretSrc.sln in Visual Studio 2022
 # Build Release x64
@@ -81,19 +81,19 @@ npm run dev
       <section style={{ marginTop: "2rem" }}>
         <h2>Key Technologies</h2>
         <ul style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "1rem", listStyle: "none", padding: 0 }}>
-          <li style={{ padding: "1rem", background: "#fafafa", borderRadius: "8px", border: "1px solid #eee" }}>
+          <li style={{ padding: "1rem", background: "#fafafa", borderRadius: "8px", border: "1px solid #333" }}>
             <strong>ENet 1.3.18 Fork</strong><br />
             <small>UDP with reliability, CRC32, Range Coder compression, New Packet Protocol</small>
           </li>
-          <li style={{ padding: "1rem", background: "#fafafa", borderRadius: "8px", border: "1px solid #eee" }}>
+          <li style={{ padding: "1rem", background: "#fafafa", borderRadius: "8px", border: "1px solid #333" }}>
             <strong>C++17</strong><br />
             <small>Modern C++, nlohmann/json, RapidJSON, custom string crypter</small>
           </li>
-          <li style={{ padding: "1rem", background: "#fafafa", borderRadius: "8px", border: "1px solid #eee" }}>
+          <li style={{ padding: "1rem", background: "#fafafa", borderRadius: "8px", border: "1px solid #333" }}>
             <strong>JSON Persistence</strong><br />
             <small>World files (worlds/*.json), Player data, Guild data</small>
           </li>
-          <li style={{ padding: "1rem", background: "#fafafa", borderRadius: "8px", border: "1px solid #eee" }}>
+          <li style={{ padding: "1rem", background: "#fafafa", borderRadius: "8px", border: "1px solid #333" }}>
             <strong>Visual Studio 2022</strong><br />
             <strong>Windows Sockets (Winsock)</strong>
           </li>

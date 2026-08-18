@@ -3,7 +3,7 @@
 export default function PersistencePage() {
   return (
     <article style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto", lineHeight: 1.7 }}>
-      <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #eee" }}>
+      <header style={{ marginBottom: "2rem", paddingBottom: "1rem", borderBottom: "1px solid #333" }}>
         <h1>Data Persistence</h1>
         <p style={{ color: "#666", fontSize: "1.1rem" }}>JSON storage, world save, player save, and file structure</p>
       </header>
@@ -11,7 +11,7 @@ export default function PersistencePage() {
       <section style={{ marginBottom: "2rem" }}>
         <h2>Storage Overview</h2>
         <p>The server uses plain JSON files for all persistent state. No external database is required.</p>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`base-gt3/
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`base-gt3/
 ├── gtps3.exe              # server binary
 ├── items.dat              # item database
 ├── worlds/
@@ -32,7 +32,7 @@ export default function PersistencePage() {
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>Player Save Format</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`{
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`{
   "userName": "admin",
   "userID": 12345,
   "password_hash": "...",
@@ -66,25 +66,25 @@ export default function PersistencePage() {
         <h2>Save Triggers</h2>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
-            <tr style={{ background: "#f5f5f5" }}>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Trigger</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Data Saved</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Guard</th>
+            <tr style={{ background: "#1c1c1c" }}>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Trigger</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Data Saved</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Guard</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Auto-save timer</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>All worlds + players</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>f_saving_ flag prevents re-entry</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Disconnect</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Player data + world</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>-</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>World change</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Player position</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>-</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Server shutdown</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Everything</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Graceful flag</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Guild update</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Guild data</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>-</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Auto-save timer</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>All worlds + players</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>f_saving_ flag prevents re-entry</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Disconnect</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Player data + world</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>-</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>World change</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Player position</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>-</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Server shutdown</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Everything</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Graceful flag</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Guild update</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Guild data</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>-</td></tr>
           </tbody>
         </table>
       </section>
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>Save Loop</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Main loop save check
+        <pre style={{ background: "#1c1c1c", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Main loop save check
 void auto_save_loop() {
     if (f_saving_) return;      // avoid re-entrant save
     f_saving_ = true;
@@ -113,15 +113,15 @@ void auto_save_loop() {
         <h2>Database Files (db/)</h2>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
-            <tr style={{ background: "#f5f5f5" }}>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>File</th>
-              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #eee" }}>Content</th>
+            <tr style={{ background: "#1c1c1c" }}>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>File</th>
+              <th style={{ padding: "0.75rem", textAlign: "left", border: "1px solid #333" }}>Content</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>bans.json</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Permanent + temporary bans (by name, IP, RID)</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>reports.json</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Player reports for moderation</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>settings.json</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Global server settings, event schedules</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>bans.json</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Permanent + temporary bans (by name, IP, RID)</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>reports.json</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Player reports for moderation</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #333" }}>settings.json</td><td style={{ padding: "0.75rem", border: "1px solid #333" }}>Global server settings, event schedules</td></tr>
           </tbody>
         </table>
       </section>
