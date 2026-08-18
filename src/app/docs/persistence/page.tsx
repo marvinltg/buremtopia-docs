@@ -84,7 +84,7 @@ export default function PersistencePage() {
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>Save Loop</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{// Main loop save check
+        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Main loop save check
 void auto_save_loop() {
     if (f_saving_) return;      // avoid re-entrant save
     f_saving_ = true;

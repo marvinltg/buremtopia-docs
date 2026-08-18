@@ -104,12 +104,12 @@ export default function ItemsPage() {
           </thead>
           <tbody>
             <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>World Lock</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Ownership tile locking; reserved tile count</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Seeds</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Plant -> grow over time -> harvest fruit</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Seeds</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Plant -&gt; grow over time -&gt; harvest fruit</td></tr>
             <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Signs</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Stores text in tile_strings; renders on canvas</td></tr>
             <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Vending Machine</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Sells items for currency; stock tracking</td></tr>
             <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Chemical Combiner</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Combines inputs into output item</td></tr>
             <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Geiger Counter</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Detects radioactive items; counter value</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Tomorrow Machine</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>RNG machine; roll chances -> output</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Tomorrow Machine</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>RNG machine; roll chances -&gt; output</td></tr>
             <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Dice</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Random 1-6; message broadcast</td></tr>
             <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Music Player</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Plays audio track; sets world music</td></tr>
             <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Weather Provider</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Sets world weather effect</td></tr>
@@ -134,7 +134,7 @@ const int ITEM_FLAG_SHIELD      = 512;  // special vfx`}</code></pre>
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>Drops & Harvesting</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{// On block break, roll drops:
+        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// On block break, roll drops:
 for (int i = 0; i < 3; i++) {
     if (item->drops[i] != 0) {
         // drop_chance% chance to drop item

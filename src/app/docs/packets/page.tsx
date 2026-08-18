@@ -128,22 +128,22 @@ action|join_request|WORLD_NAME`}</code></pre>
             </tr>
           </thead>
           <tbody>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnPlayerLeft</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -> Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>0</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnPlayerLeft</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -&gt; Client</td></tr>
             <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>1</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnPlayerMoving</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Both</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>2</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSpawn</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -> Client</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>3</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnRemove</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -> Client</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>4</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendMapData</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -> Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>2</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSpawn</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -&gt; Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>3</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnRemove</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -&gt; Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>4</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendMapData</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -&gt; Client</td></tr>
             <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>7</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendTileUpdateData</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Both</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>9</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendTileUpdateDataMultiple</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -> Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>9</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendTileUpdateDataMultiple</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -&gt; Client</td></tr>
             <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>11</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendTileDamage</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Both</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>12</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendPingRequest</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -> Client</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>13</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendPingResponse</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Client -> Srv</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>19</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendInventoryState</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -> Client</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>20</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendItemDatabaseData</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -> Client</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>21</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendTileData</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -> Client</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>22</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnReconnect</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -> Client</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>26</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendGameModes</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -> Client</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>27</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendPlayerMessage</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -> Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>12</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendPingRequest</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -&gt; Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>13</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendPingResponse</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Client -&gt; Srv</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>19</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendInventoryState</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -&gt; Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>20</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendItemDatabaseData</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -&gt; Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>21</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendTileData</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -&gt; Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>22</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnReconnect</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -&gt; Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>26</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendGameModes</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -&gt; Client</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>27</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>OnSendPlayerMessage</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Srv -&gt; Client</td></tr>
           </tbody>
         </table>
       </section>
@@ -185,7 +185,7 @@ action|join_request|WORLD_NAME`}</code></pre>
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>Packet Counters (Anti-Flood)</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{// Per-peer monitoring (anti-flood)
+        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Per-peer monitoring (anti-flood)
 pInfo(peer)->all_packets++;      // total received
 pInfo(peer)->pps++;              // per-second counter
 pInfo(peer)->last_packet = now_ms();

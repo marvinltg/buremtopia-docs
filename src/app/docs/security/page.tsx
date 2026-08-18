@@ -28,7 +28,7 @@ export default function SecurityPage() {
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>Login Rate Limiting</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{// Window reset every 6.5 seconds
+        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Window reset every 6.5 seconds
 if (login_time + 6500 < now_ms()) {
     login_count = 0;
     update_item_data = 0;
@@ -69,7 +69,7 @@ if (login_count > 40) {
       <section style={{ marginBottom: "2rem" }}>
         <h2>Bypass (Type 3) Mechanism</h2>
         <p>Type 3 (Extended Text) packets require the <code>bypass</code> flag which is only set after successful login:</p>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{// On login success:
+        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// On login success:
 pInfo(peer)->bypass = true;
 
 // On packet type 3:
@@ -100,7 +100,7 @@ if (packet->type == 3 && pInfo(peer)->bypass == false) {
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>Logging</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{// Console logging patterns
+        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Console logging patterns
 [INFO]  player connected: name (ip)
 [LOGIN] user:admin logged in
 [WARN]  flood detected: ip
@@ -111,7 +111,7 @@ if (packet->type == 3 && pInfo(peer)->bypass == false) {
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>Server Restart Protection</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{// Graceful restart: block new logins, save, shutdown
+        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Graceful restart: block new logins, save, shutdown
 if (restart_server_status) {
     // reject new connections
     // save all worlds/players

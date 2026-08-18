@@ -58,12 +58,12 @@ export default function WorldPage() {
         <h2>World Loading</h2>
         <ol>
           <li><strong>get_world(name)</strong> - lookup loaded world; if absent, load from disk</li>
-          <li><strong>Load JSON</strong> from the worlds folder: <code>{name}_.json</code></li>
+          <li><strong>Load JSON</strong> from the worlds folder: <code>{"{name}"}_.json</code></li>
           <li><strong>Default world</strong> - if missing, create 100x100 empty world with default background</li>
           <li><strong>Parse layers</strong> - front, background_tiles, foreground (objects)</li>
           <li><strong>Restore data</strong> - locks, weather, NPCs, machines, access list</li>
         </ol>
-        <p><strong>Note:</strong> New worlds default to 100x100 tiles. World file naming uses the format <code>{name}_.json</code> (uppercase name + trailing underscore).</p>
+        <p><strong>Note:</strong> New worlds default to 100x100 tiles. World file naming uses the format <code>{"{name}"}_.json</code> (uppercase name + trailing underscore).</p>
       </section>
 
       <section style={{ marginBottom: "2rem" }}>
@@ -174,7 +174,7 @@ for (World& w : worlds) {
   "machines": [...],
   "npcs": [...]
 }`}</code></pre>
-        <p>Files are stored as <code>{name}_.json</code> under the worlds directory. Empty/untouched worlds are not written to disk until first modification.</p>
+        <p>Files are stored as <code>{"{name}"}_.json</code> under the worlds directory. Empty/untouched worlds are not written to disk until first modification.</p>
       </section>
     </article>
   );

@@ -123,8 +123,8 @@ while (true) {
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>Peer Data Management</h2>
-        <p>Each connected peer stores a Player* in peer->data:</p>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{// On CONNECT:
+        <p>Each connected peer stores a Player* in peer-&gt;data:</p>
+        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// On CONNECT:
 peer->data = new Player;
 pInfo(peer)->ip = client_ip;
 pInfo(peer)->id = peer->connectID;
@@ -149,9 +149,9 @@ peer->data = NULL;`}</code></pre>
             </tr>
           </thead>
           <tbody>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>1</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>ENet Connect ACK</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>S->C</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Initial handshake</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>2</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Text Packet</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>C->S</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Login, chat, dialogs, commands</td></tr>
-            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>3</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Extended Text</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>C->S</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Bypass-protected actions</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>1</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>ENet Connect ACK</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>S-&gt;C</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Initial handshake</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>2</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Text Packet</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>C-&gt;S</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Login, chat, dialogs, commands</td></tr>
+            <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>3</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Extended Text</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>C-&gt;S</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Bypass-protected actions</td></tr>
             <tr><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>4</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Binary Packet</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Both</td><td style={{ padding: "0.75rem", border: "1px solid #eee" }}>Movement, actions, world data</td></tr>
           </tbody>
         </table>
@@ -159,7 +159,7 @@ peer->data = NULL;`}</code></pre>
 
       <section>
         <h2>Rate Limiting & Protection</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{// Per-peer limits
+        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Per-peer limits
 if (pInfo(peer)->all_packets >= 560) {
     enet_peer_disconnect_later(peer, 0);  // Flood protection
 }

@@ -85,7 +85,7 @@ export default function GuildsPage() {
       <section style={{ marginBottom: "2rem" }}>
         <h2>Guild Leaderboard</h2>
         <p>The server maintains guild leaderboards ranking by total gems and locks earned. Leaderboard data is refreshed during guild ticks:</p>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{// Refresh leaderboard periodically
+        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Refresh leaderboard periodically
 void update_guild_leaderboard() {
     for (Guild& g : guilds) {
         long long score = g.totalLocks;
@@ -99,7 +99,7 @@ void update_guild_leaderboard() {
       <section style={{ marginBottom: "2rem" }}>
         <h2>Guild Persistence</h2>
         <ul>
-          <li>Guilds stored as JSON in the guilds directory: <code>{guildID}.json</code></li>
+          <li>Guilds stored as JSON in the guilds directory: <code>{"{guildID}"}.json</code></li>
           <li>Member list contains userID, name, rank, join date, gems contributed</li>
           <li>Auto-saved alongside world saves on the same cadence</li>
           <li>On login, guild info (guildID + guildRank) is loaded into the player</li>

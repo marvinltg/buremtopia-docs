@@ -95,7 +95,7 @@ end_hide_n_seek();
       <section style={{ marginBottom: "2rem" }}>
         <h2>Crypto Price Update</h2>
         <p>The server fetches crypto prices over HTTP and displays them in-game:</p>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{// Periodic HTTP fetch
+        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Periodic HTTP fetch
 void update_crypto_prices() {
     if (now_ms() - crypto.last_fetch < CYCLE) return;
 

@@ -126,8 +126,8 @@ export default function HttpPage() {
       <section style={{ marginBottom: "2rem" }}>
         <h2>Enabling the Resolver</h2>
         <p>The resolver thread is currently commented out in <code>main()</code>:</p>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{// std::thread resolver(resolver_loop, server_port);
-// resolver.detach();}</code></pre>
+        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// std::thread resolver(resolver_loop, server_port);
+// resolver.detach();`}</code></pre>
         <p>Uncomment and ensure the server is run as Administrator to enable.</p>
       </section>
 

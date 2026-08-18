@@ -94,7 +94,7 @@ export default function LoginPage() {
       <section style={{ marginBottom: "2rem" }}>
         <h2>Server-Side Processing</h2>
         <h3>Rate Limiting</h3>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{// Reset counters every 6.5 seconds
+        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Reset counters every 6.5 seconds
 if (Server_Security.login_time + 6500 < now_ms()) {
     Server_Security.login_count = 0;
     Server_Security.update_item_data = 0;
@@ -114,18 +114,18 @@ Server_Security.login_count++;`}</code></pre>
         <ol>
           <li>Parse login packet fields</li>
           <li>Check RID bans (<code>Server_Security.ridbans</code>)</li>
-          <li>Load player JSON from <code>players/{name}_.json</code></li>
+          <li>Load player JSON from <code>players/{"{name}"}_.json</code></li>
           <li>Verify password hash</li>
           <li>Load inventory, clothes, currency, flags</li>
           <li>Apply playmods, check expirations</li>
           <li>Build and send OSM response</li>
-          <li>Set <code>pInfo(peer)->bypass = true</code> for type 3 packets</li>
+          <li>Set <code>pInfo(peer)-&gt;bypass = true</code> for type 3 packets</li>
         </ol>
       </section>
 
       <section style={{ marginBottom: "2rem" }}>
         <h2>Join Request & World Entry</h2>
-        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{// Client sends (type 3):
+        <pre style={{ background: "#f5f5f5", padding: "1rem", borderRadius: "4px", overflow: "auto" }}><code>{`// Client sends (type 3):
 action|join_request|WORLD_NAME
 
 // Server processes:
@@ -141,7 +141,7 @@ action|join_request|WORLD_NAME
         <h2>Load Testing Tool</h2>
         <p>A bundled test tool simulates 60 concurrent clients:</p>
         <ul>
-          <li>Generates unique names: <code>faker{id}_{timestamp}</code></li>
+          <li>Generates unique names: <code>faker{"{id}"}_{"{timestamp}"}</code></li>
           <li>Sends login packet with all required fields</li>
           <li>Waits for <code>OnSuperMainStart</code> detection</li>
           <li>Sends <code>action|join_request|START</code></li>
