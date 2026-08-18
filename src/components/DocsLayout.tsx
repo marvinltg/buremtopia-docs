@@ -186,7 +186,9 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
           <span className="topbar-sep">/</span>
           <span className="topbar-current">{currentLabel}</span>
         </div>
-        {children}
+        <div key={pathname} className="page-transition">
+          {children}
+        </div>
       </main>
     </div>
   );
